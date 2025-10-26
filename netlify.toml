@@ -1,0 +1,26 @@
+# netlify.toml directions
+# This file tells Netlify how to deploy and route traffic
+
+[build]
+# If you are using plain HTML/CSS/JS, you might not need a build command.
+# If you use a build script (like 'npm run build'), uncomment the line below.
+# command = "npm run build"
+publish = "/" # Assumes your built files (like index.html) are in the root directory
+
+[functions]
+# This tells Netlify where your functions are located
+directory = "netlify/functions"
+
+[[redirects]]
+# When the browser requests this URL from GitHub Pages site (the frontend):
+from = "/.netlify/functions/*"
+
+# Redirect the request to the Netlify Function URL, using the actual Netlify site name
+# Replace 'weathevista' with your site's domain (e.g., 'weather-app.netlify.app')
+to = "https://weathevista.netlify.app/.netlify/functions/:splat"
+
+# Status 200 means the browser sees the response as if it came directly from the initial path
+status = 200
+
+# Force ensures the redirect happens even if a file exists (it won't, but this is safer)
+force = true
